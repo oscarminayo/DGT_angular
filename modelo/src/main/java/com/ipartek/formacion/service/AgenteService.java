@@ -14,7 +14,7 @@ public interface AgenteService {
 	 * @param password
 	 * @return Agente si existe, null si no existe
 	 */
-	Agente existe( String numeroPlaca, String password);
+	Agente existe( int numeroPlaca, String pass);
 	
 
 	/**

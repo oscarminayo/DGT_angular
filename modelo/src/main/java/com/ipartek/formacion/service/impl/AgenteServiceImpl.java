@@ -2,17 +2,20 @@ package com.ipartek.formacion.service.impl;
 
 import java.util.List;
 
+import com.ipartek.formacion.modelo.daos.AgenteDAO;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.service.AgenteService;
 
 public class AgenteServiceImpl implements AgenteService {
 
+	private static AgenteDAO agenteDAO ;
 	
 	private static AgenteServiceImpl INSTANCE = null;
 	
 	private AgenteServiceImpl() {
-		super();		
+		super();	
+		agenteDAO = AgenteDAO.getInstance();
 	}
 
 	public static synchronized AgenteServiceImpl getInstance() {
@@ -21,20 +24,19 @@ public class AgenteServiceImpl implements AgenteService {
         } 
         return INSTANCE;
     }
+	
+	
+	
 
 
-	@Override
-	public Agente existe(String numeroPlaca, String password) {
-		// TODO llamar al DAO
-		Agente agente = null;
+	public Agente existe(int numeroPlaca, String pass) {
 		
-		
-		//esto esta hardcodeado
-		if ( "admin".equals(password) && "admin".equals(numeroPlaca)) {
-			agente = new Agente(1l, "Takelberry", "12345678", "");
-		}
-		
-		
+		//el agente esta hardcodeado, pendiente llamar al dao para obtenerlo
+//		if ( "admin".equals(password) && "admin".equals(numeroPlaca)) {
+//			agente = new Agente(1l, "Takelberry", "12345678", "");
+//		}
+			
+		Agente agente = agenteDAO.getByPlacaPassword(numeroPlaca, pass);		
 		return agente;
 	}
 

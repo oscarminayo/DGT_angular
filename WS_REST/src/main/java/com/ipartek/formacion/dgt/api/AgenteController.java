@@ -38,7 +38,7 @@ public class AgenteController {
 	//las variables de la uri y los PathVariable han de llamarse igual.
 	@RequestMapping( value= {"/api/agente/login/{numeroPlaca}/{pass}"}, method = RequestMethod.GET)
 	public ResponseEntity<Agente> login( 
-										@PathVariable String numeroPlaca, 
+										@PathVariable int numeroPlaca, 
 										@PathVariable String pass ){		
 		
 		//por defecto tenemos codigo 403
