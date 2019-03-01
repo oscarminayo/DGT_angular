@@ -24,6 +24,7 @@ private static MultaDAO2 INSTANCE = null;
 			"    m.fecha_alta,\r\n" + 
 			"    c.id as 'id_coche',\r\n" + 
 			"    c.modelo as 'modelo_coche',\r\n" + 
+			"    c.matricula as 'matricula_coche',\r\n" + 
 			"    a.id as 'id_agente',\r\n" + 
 			"    a.nombre as 'nombre_agente',\r\n" + 
 			"    m.fecha_mod,\r\n" + 
@@ -72,6 +73,7 @@ private static MultaDAO2 INSTANCE = null;
 		Coche coche = new Coche();
 		coche.setId(rs.getInt("id_coche"));
 		coche.setModelo(rs.getString("modelo_coche"));
+		coche.setMatricula(rs.getString("matricula_coche"));
 		
 		Agente agente = new Agente();
 		agente.setId(rs.getInt("id_agente"));
