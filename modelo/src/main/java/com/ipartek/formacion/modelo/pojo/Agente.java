@@ -5,7 +5,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Agente {
-	private Long id;
+	private int id;
 	private String nombre;
 	@NotEmpty(message = "No puede estar vacio")
 	@Pattern(regexp = "\\d{6}", message = "Introduzca 6 numeros")
@@ -13,7 +13,7 @@ public class Agente {
 	@NotEmpty(message = "No puede estar vacio")
 	private String password;
 	
-	public Agente(Long id, String nombre, String placa, String password) {
+	public Agente(int id, String nombre, String placa, String password) {
 		this();
 		setId(id);
 		setNombre(nombre);
@@ -23,17 +23,17 @@ public class Agente {
 
 	public Agente() {
 		super();
-		this.id = -1l;
+		this.id = -1;
 		this.nombre = "";
 		this.placa = "";
 		this.password = "";
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

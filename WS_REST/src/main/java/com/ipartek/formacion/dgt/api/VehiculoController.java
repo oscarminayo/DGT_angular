@@ -129,7 +129,7 @@ public class VehiculoController {
 	
 	@RequestMapping( value= {"/api/vehiculo/{id}"}, method = RequestMethod.PUT)
 	public ResponseEntity<Coche> modificar(  
-				@PathVariable long id, 
+				@PathVariable int id, 
 				@RequestBody Coche coche ){
 		
 		ResponseEntity<Coche> response = new ResponseEntity<Coche>( HttpStatus.NOT_FOUND );

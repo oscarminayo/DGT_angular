@@ -165,7 +165,7 @@ public class LoginDAO {
 
 	private Agente rowMapper(ResultSet rs) throws SQLException {
 		Agente a = new Agente();
-		a.setId(rs.getLong("id"));
+		a.setId(rs.getInt("id"));
 		a.setNombre(rs.getString("nombre"));
 		a.setPlaca(String.valueOf(rs.getInt("placa")));
 		a.setPassword(rs.getString("password"));

@@ -77,7 +77,7 @@ public class AgenteDAO {
 	
 	private Agente rowMapper(ResultSet rs) throws SQLException {
 		Agente agente = new Agente();
-		agente.setId(rs.getLong("id"));
+		agente.setId(rs.getInt("id"));
 		agente.setNombre(rs.getString("nombre"));
 		agente.setPlaca(rs.getString("placa"));
 		agente.setPassword(rs.getString("password"));

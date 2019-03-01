@@ -1,5 +1,8 @@
 package com.ipartek.formacion.dgt.api;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -14,55 +17,50 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.service.AgenteService;
 import com.ipartek.formacion.service.impl.AgenteServiceImpl;
 
 @CrossOrigin
 @RestController
-public class AgenteController {
-
+public class MultaController {
 	private final static Logger LOG = Logger.getLogger(AgenteController.class);
 	private AgenteService agenteService;
 	private ValidatorFactory factory;
 	private Validator validator;
 	
-	public AgenteController() {
+	public MultaController() {
 		super();
 		agenteService = AgenteServiceImpl.getInstance();
 		factory  = Validation.buildDefaultValidatorFactory();
     	validator  = factory.getValidator();
 	}
 	
-	
-	
 	//las variables de la uri y los PathVariable han de llamarse igual.
-	@RequestMapping( value= {"/api/agente/login/{numeroPlaca}/{pass}"}, method = RequestMethod.GET)
-	public ResponseEntity<Agente> login( 
-										@PathVariable int numeroPlaca, 
-										@PathVariable String pass ){		
-		
-		//por defecto tenemos codigo 403
-		ResponseEntity<Agente> response = new ResponseEntity<Agente>(HttpStatus.FORBIDDEN);
-		try {
+		@RequestMapping( value= {"/api/agente/{idAgente}/multas"}, method = RequestMethod.GET)
+		public ResponseEntity<List<Multa>> obtenerMultas( 
+											@PathVariable int idAgente){		
 			
-			//si existe el agente (diferente de null), tendremos un codigo 200
-			Agente agente = agenteService.existe(numeroPlaca, pass);
-			if ( agente !=null ) {
-				response = new ResponseEntity<Agente>(agente, HttpStatus.OK);
-			}		
+			//por defecto tenemos codigo 403
+			ResponseEntity<List<Multa>> response = new ResponseEntity<List<Multa>>(HttpStatus.FORBIDDEN);
+			try {
+				
+				//si existe la lista de multas(diferente de null), tendremos un codigo 200
+				List<Multa> multas = agenteService.obtenerMultas(idAgente);
+				if ( multas !=null ) {
+					response = new ResponseEntity<List<Multa>>(multas, HttpStatus.OK);
+				}		
+				
+			//si ocurre alguna excepcion tendremos codigo 500
+			}catch (Exception e) {
+				e.printStackTrace();
+				LOG.error(e);
+				response = new ResponseEntity<List<Multa>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 			
-		//si ocurre alguna excepcion tendremos codigo 500
-		}catch (Exception e) {
-			LOG.error(e);
-			response = new ResponseEntity<Agente>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return response;
+			
 		}
-		
-		return response;
-		
-	}
-	
-	
-	
 	
 	
 	

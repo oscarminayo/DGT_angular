@@ -189,7 +189,7 @@ public class CocheDAO {
 			cs.registerOutParameter(4, Types.INTEGER);
 			
 			if ( cs.executeUpdate() == 1) {
-				coche.setId(cs.getLong(4));
+				coche.setId(cs.getInt(4));
 			} else {
 				throw new SQLException("No se puede insertar el coche " + coche );
 			}
@@ -199,7 +199,7 @@ public class CocheDAO {
 
 	private Coche rowMapper(ResultSet rs) throws SQLException {
 		Coche c = new Coche();
-		c.setId(rs.getLong("id"));
+		c.setId(rs.getInt("id"));
 		c.setMatricula(rs.getString("matricula"));
 		c.setModelo(rs.getString("modelo"));
 		c.setKm(rs.getInt("km"));
