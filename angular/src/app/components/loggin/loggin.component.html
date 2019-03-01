@@ -1,0 +1,37 @@
+
+<main role="main" class="container">
+
+    <div style="border:1px solid red; padding:10px;">
+        <p>Valores: {{ formulario.value | json }}</p>
+        <p>Estado:  {{ formulario.status | json }}</p> 
+    </div>
+
+    <app-alert [alert]="alert"></app-alert>
+
+  <div>
+    <img class="img-responsive mx-auto d-block mb-5 mt-5" width="175px"
+      height="230px"
+      src="https://oposicionpolicianacional.centroandaluz.net/wp-content/uploads/2017/05/escudo-policia-nacional-218x300.png"
+      alt="escudo policia">
+  </div>
+  <form [formGroup]="formulario" (submit)="comprobar()">
+
+    <h1 class="h3 mb-3 font-weight-normal text-center text-black">Iniciar Sesión
+    </h1>
+    <label for="usuario">Nº Placa </label> 
+    <input type="text" formControlName="usuario" class="form-control" placeholder="Minimo 3 letras">
+    <p *ngIf="formulario.controls.usuario.invalid && formulario.controls.usuario.touched"
+      class = "text-danger">*recuerda que minimo 3 letras</p>
+    
+
+    <label for="pass"> Contraseña:</label> 
+    <input type="password" formControlName="pass" class="form-control"
+      placeholder="minimo 3 letras">
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="formulario.invalid">
+      Acceder</button>
+    <!--<%@include file="includes/mensajes.jsp"%>-->
+  </form>
+  </main>
+
+  
