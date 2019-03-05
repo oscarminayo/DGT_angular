@@ -3,6 +3,7 @@ package com.ipartek.formacion.service;
 import java.util.List;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.modelo.pojo.MultaNueva;
 
@@ -46,6 +47,8 @@ public interface AgenteService {
 	 * @return listado, si no hay ninguna vacio, no null
 	 */
 	List<Multa> obtenerMultas(int idAgente);
+	
+	Coche buscarMatricula(String matricula);
 	
 
 }

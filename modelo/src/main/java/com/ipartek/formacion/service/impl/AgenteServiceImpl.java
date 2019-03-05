@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ipartek.formacion.modelo.daos.AgenteDAO;
+import com.ipartek.formacion.modelo.daos.CocheDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO2;
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.modelo.pojo.MultaNueva;
 import com.ipartek.formacion.service.AgenteService;
@@ -16,6 +18,7 @@ public class AgenteServiceImpl implements AgenteService {
 
 	private static AgenteDAO agenteDAO ;
 	private static MultaDAO2 multaDAO;
+	private static CocheDAO cocheDAO;
 	
 	private static AgenteServiceImpl INSTANCE = null;
 	
@@ -23,6 +26,7 @@ public class AgenteServiceImpl implements AgenteService {
 		super();	
 		agenteDAO = AgenteDAO.getInstance();
 		multaDAO = MultaDAO2.getInstance();
+		cocheDAO = CocheDAO.getInstance();
 	}
 
 	public static synchronized AgenteServiceImpl getInstance() {
@@ -70,6 +74,12 @@ public class AgenteServiceImpl implements AgenteService {
 	public List<Multa> obtenerMultas(int idAgente) {
 		ArrayList<Multa> multas = multaDAO.getById(idAgente);
 		return multas;
+	}
+	
+	@Override
+	public Coche buscarMatricula(String matricula) {
+		
+		return cocheDAO.getByMatricula(matricula);
 	}
 	
 	
