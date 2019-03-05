@@ -114,7 +114,7 @@ public class MultaDAO {
 			cs.registerOutParameter(5, Types.INTEGER);
 			int affectedRows = cs.executeUpdate();
 			if (affectedRows == 1) {
-				m.setId(cs.getLong(5));
+				m.setId(cs.getInt(5));
 				resul = true;
 			}
 
@@ -154,12 +154,12 @@ public class MultaDAO {
 			}
 			
 		}
-		m.setId(rs.getLong("id"));
+		m.setId(rs.getInt("id"));
 		c.setMatricula(rs.getString("matricula"));
 		if (isGetById) {
 			m.setImporte(rs.getDouble("importe"));
 			m.setConcepto(rs.getString("concepto"));
-			c.setId(rs.getLong("id_coche"));
+			c.setId(rs.getInt("id_coche"));
 			c.setModelo(rs.getString("modelo"));
 			c.setKm(rs.getInt("km"));
 		}

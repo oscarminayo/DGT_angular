@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaNueva;
 
 public interface AgenteService {
 	
@@ -17,6 +18,17 @@ public interface AgenteService {
 	Agente existe( int numeroPlaca, String pass);
 	
 
+//	/**
+//	 * Multar un Vehiculo
+//	 * @param idCoche
+//	 * @param idAgente
+//	 * @param concepto
+//	 * @param importe
+//	 * @return
+//	 * @throws Exception si el concepto es null, el idAgente o idCoche no existen, importe < 0
+//	 */
+//	Multa multar( int idCoche, int idAgente, String concepto, float importe  ) throws Exception;
+
 	/**
 	 * Multar un Vehiculo
 	 * @param idCoche
@@ -26,8 +38,7 @@ public interface AgenteService {
 	 * @return
 	 * @throws Exception si el concepto es null, el idAgente o idCoche no existen, importe < 0
 	 */
-	Multa multar( int idCoche, int idAgente, String concepto, float importe  ) throws Exception;
-	
+	boolean insertar(MultaNueva multa);
 	
 	/**
 	 * Todas las multas de un Agente

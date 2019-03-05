@@ -288,7 +288,7 @@ public class MultasController extends HttpServlet {
 		c = new Coche();
 		try {
 			m.setConcepto(concepto);
-			c.setId(Long.parseLong(id_coche));
+			c.setId(Integer.parseInt(id_coche));
 			m.setCoche(c);
 			m.setImporte(Double.parseDouble(importe));
 			m.setAgente((Agente) session.getAttribute("agenteLogueado"));

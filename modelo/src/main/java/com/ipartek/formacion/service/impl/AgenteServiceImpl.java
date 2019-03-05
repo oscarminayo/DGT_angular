@@ -1,5 +1,6 @@
 package com.ipartek.formacion.service.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import com.ipartek.formacion.modelo.daos.MultaDAO;
 import com.ipartek.formacion.modelo.daos.MultaDAO2;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaNueva;
 import com.ipartek.formacion.service.AgenteService;
 
 public class AgenteServiceImpl implements AgenteService {
@@ -45,10 +47,23 @@ public class AgenteServiceImpl implements AgenteService {
 		return agente;
 	}
 
+//	@Override
+//	public Multa multar(int idCoche, int idAgente, String concepto, float importe) throws Exception {
+//		
+//		Multa multa = multaDAO.insert(idCoche, idAgente, concepto, importe);
+//		return multa;
+//	}
+	
 	@Override
-	public Multa multar(int idCoche, int idAgente, String concepto, float importe) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public boolean insertar(MultaNueva multa) {
+		boolean resultado = false;
+		try {
+			resultado = multaDAO.insert(multa);
+		} catch (SQLException e) {
+			return false;
+		}
+		return resultado;
+	
 	}
 
 	@Override

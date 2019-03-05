@@ -1,19 +1,25 @@
 package com.ipartek.formacion.modelo.daos;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import com.ipartek.formacion.modelo.cm.ConnectionManager;
 import com.ipartek.formacion.modelo.pojo.Agente;
 import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
+import com.ipartek.formacion.modelo.pojo.MultaNueva;
+
+
 
 
 public class MultaDAO2 {
-	
+private boolean isGetById = false;
+private boolean isBaja = false;
 private static MultaDAO2 INSTANCE = null;
 	
 	
@@ -30,8 +36,10 @@ private static MultaDAO2 INSTANCE = null;
 			"    m.fecha_mod,\r\n" + 
 			"    m.fecha_baja\r\n" + 
 			"FROM multa as m,coche as c, agente as a\r\n" + 
-			"WHERE m.id_agente = a.id AND m.id_coche = c.id AND a.id = ?;";;
+			"WHERE m.id_agente = a.id AND m.id_coche = c.id AND a.id = ?;";
 	
+	//private static final String SQL_INSERT = "INSERT into multa (id_coche, id_agente, concepto, importe) VALUES (?, ?, ?, ?);";
+	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
 	//constructor privado, solo acceso por getInstance()
 		private MultaDAO2() {
 			super();
@@ -67,6 +75,54 @@ private static MultaDAO2 INSTANCE = null;
 		
 		return multas;
 	}
+	
+//	public Multa insert(int idCoche, int idAgente, String concepto, float importe) {
+//		Multa multa = null;
+//		
+//		try (Connection conn = ConnectionManager.getConnection(); 
+//				PreparedStatement pst = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)){
+//			pst.setInt(1, idCoche);
+//			pst.setInt(2, idAgente);
+//			pst.setString(3, concepto);
+//			pst.setFloat(4, importe);
+//			
+//			if(pst.executeUpdate() == 1) {
+//				ResultSet rs = pst.getGeneratedKeys();
+//				if(rs.next()) {
+//					int id = rs.getInt(1);
+//					multa.setId(id);
+//				}
+//			}
+//			
+//			
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		
+//		return multa;
+//	}
+	
+	public boolean insert(MultaNueva m) throws SQLException {
+		boolean resul = false;
+		isGetById = false;
+		try (Connection conn = ConnectionManager.getConnection();
+				CallableStatement cs = conn.prepareCall(SQL_INSERT);) {
+			cs.setDouble(1, m.getImporte());
+			cs.setString(2, m.getConcepto());
+			cs.setInt(3, m.getId_coche());
+			cs.setInt(4, m.getId_agente());
+			cs.registerOutParameter(5, Types.INTEGER);
+			int affectedRows = cs.executeUpdate();
+			if (affectedRows == 1) {
+				m.setId(cs.getInt(5));
+				resul = true;
+			}
+		}
+		return resul;
+	}
+	
+	
 	
 	private Multa rowMapper(ResultSet rs) throws SQLException {
 		
