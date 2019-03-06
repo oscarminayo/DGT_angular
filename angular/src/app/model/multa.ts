@@ -1,27 +1,34 @@
+export class Multa {
 
 
-export class Multa{
     private _id: number;
-    private _matricula: string;
-    private _concepto: string; 
-    private _importe: number; 
-    private _fecha_alta: string;
-    private _fecha_baja: string;
-    private _fecha_modificacion: string;
+  
+    private _importe: any;
+  
+    private _concepto: string;
+ 
+    private _fecha_alta: any;
+
+    private _id_coche: number;
     
+    private _id_agente: number;
 
-    constructor(id:number, matricula:string, concepto:string, importe:number, 
-        fecha_alta:string, fecha_baja: string, fecha_modificacion: string){
+    private _fechaBaja: string;
+    
+  
 
-            this._id = id;
-            this._matricula = matricula;
-            this._concepto = concepto;
-            this._importe = importe;
-            this._fecha_alta = fecha_alta;
-            this._fecha_baja = fecha_baja;
-            this._fecha_modificacion = fecha_modificacion;
+ 
+    constructor(id:number,importe:any, concepto:string, fecha_alta: any, id_coche: number, id_agente: number, fechaBaja?: string ){
+        this._id=id;
+        this._importe=importe; 
+        this._concepto=concepto;       
+        this._fecha_alta=fecha_alta;
+        this._id_coche=id_coche;
+        this._id_agente=id_agente;
+        this._fechaBaja = (fechaBaja) ? fechaBaja : 'Activa';
 
     }
+    
 
     public get id(): number {
         return this._id;
@@ -30,11 +37,11 @@ export class Multa{
         this._id = value;
     }
 
-    public get matricula(): string {
-        return this._matricula;
+    public get importe(): any {
+        return this._importe;
     }
-    public set matricula(value: string) {
-        this._matricula = value;
+    public set importe(value: any) {
+        this._importe = value;
     }
 
     public get concepto(): string {
@@ -44,34 +51,31 @@ export class Multa{
         this._concepto = value;
     }
 
-    public get importe(): number {
-        return this._importe;
-    }
-    public set importe(value: number) {
-        this._importe = value;
-    }
-
-    public get fecha_alta(): string {
+    public get fecha_alta(): any {
         return this._fecha_alta;
     }
-    public set fecha_alta(value: string) {
+    public set fecha_alta(value: any) {
         this._fecha_alta = value;
     }
-
-    public get fecha_baja(): string {
-        return this._fecha_baja;
+    
+    public get id_coche(): number {
+        return this._id_coche;
     }
-    public set fecha_baja(value: string) {
-        this._fecha_baja = value;
+    public set id_coche(value: number) {
+        this._id_coche = value;
+    }
+    
+    public get id_agente(): number {
+        return this._id_agente;
+    }
+    public set id_agente(value: number) {
+        this._id_agente = value;
     }
 
-    public get fecha_modificacion(): string {
-        return this._fecha_modificacion;
+    public get fechaBaja(): string {
+        return this._fechaBaja;
     }
-    public set fecha_modificacion(value: string) {
-        this._fecha_modificacion = value;
+    public set fechaBaja(value: string) {
+        this._fechaBaja = value;
     }
-
-
-
 }
