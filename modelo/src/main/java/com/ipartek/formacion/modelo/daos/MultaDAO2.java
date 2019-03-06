@@ -40,6 +40,12 @@ private static MultaDAO2 INSTANCE = null;
 	
 	//private static final String SQL_INSERT = "INSERT into multa (id_coche, id_agente, concepto, importe) VALUES (?, ?, ?, ?);";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
+	
+	private static final String SQL_ANULAR = "UPDATE multa SET fecha_baja = current_timestamp WHERE id = ?;";
+	
+	
+	
+	
 	//constructor privado, solo acceso por getInstance()
 		private MultaDAO2() {
 			super();
@@ -76,32 +82,7 @@ private static MultaDAO2 INSTANCE = null;
 		return multas;
 	}
 	
-//	public Multa insert(int idCoche, int idAgente, String concepto, float importe) {
-//		Multa multa = null;
-//		
-//		try (Connection conn = ConnectionManager.getConnection(); 
-//				PreparedStatement pst = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)){
-//			pst.setInt(1, idCoche);
-//			pst.setInt(2, idAgente);
-//			pst.setString(3, concepto);
-//			pst.setFloat(4, importe);
-//			
-//			if(pst.executeUpdate() == 1) {
-//				ResultSet rs = pst.getGeneratedKeys();
-//				if(rs.next()) {
-//					int id = rs.getInt(1);
-//					multa.setId(id);
-//				}
-//			}
-//			
-//			
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		
-//		return multa;
-//	}
+
 	
 	public boolean insert(MultaNueva m) throws SQLException {
 		boolean resul = false;
@@ -120,6 +101,24 @@ private static MultaDAO2 INSTANCE = null;
 			}
 		}
 		return resul;
+	}
+	
+	public boolean anularMulta(int idMulta) throws SQLException {
+
+		boolean resul = false;
+
+		try (Connection conn = ConnectionManager.getConnection();
+				PreparedStatement pst = conn.prepareStatement(SQL_ANULAR);) {
+			
+			pst.setInt(1, idMulta);
+			
+			int affectedRows = pst.executeUpdate();
+			if (affectedRows == 1) {
+				resul = true;
+			}
+		}
+		return resul;
+
 	}
 	
 	

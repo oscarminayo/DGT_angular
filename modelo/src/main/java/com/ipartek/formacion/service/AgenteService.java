@@ -50,5 +50,7 @@ public interface AgenteService {
 	
 	Coche buscarMatricula(String matricula);
 	
+	boolean anular(int idMulta);
+	
 
 }

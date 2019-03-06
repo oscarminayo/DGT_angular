@@ -55,13 +55,13 @@ public class EstadisticasDAO {
 		return objetivo;
 	}
 
-	public Float getTotales(String opcion, Long idAgente, int Mes, int Anio) throws SQLException {
+	public Float getTotales(String opcion, int i, int Mes, int Anio) throws SQLException {
 		Float recaudacion = null;
 		try (Connection conn = ConnectionManager.getConnection();
 				CallableStatement cs = conn.prepareCall(SQL_DEVUELVE_TOTALES);) {
 
 			cs.setString(1, opcion);
-			cs.setLong(2, idAgente);
+			cs.setLong(2, i);
 			cs.setInt(3, Anio);
 			cs.setInt(4, Mes);
 			cs.registerOutParameter(5, Types.FLOAT);
@@ -74,13 +74,13 @@ public class EstadisticasDAO {
 		return recaudacion;
 	}
 
-	public ArrayList<Estadistica> getMesesAnio(Long idagente, int anyo) {
+	public ArrayList<Estadistica> getMesesAnio(int j, int anyo) {
 		estadisticas = new ArrayList<Estadistica>();
 		int i = 0;
 		int mes = 0;
 		try (Connection conn = ConnectionManager.getConnection();
 				PreparedStatement pst = conn.prepareStatement(SQL_TOTAL_MESES_ANIO)) {
-			pst.setLong(1, idagente);
+			pst.setLong(1, j);
 			pst.setInt(2, anyo);
 			try (ResultSet rs = pst.executeQuery()) {
 				rs.next();

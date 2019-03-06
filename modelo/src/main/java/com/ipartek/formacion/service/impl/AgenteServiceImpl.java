@@ -82,6 +82,17 @@ public class AgenteServiceImpl implements AgenteService {
 		return cocheDAO.getByMatricula(matricula);
 	}
 	
+	@Override
+	public boolean anular(int idMulta) {
+		boolean resultado = false;
+		try {
+			resultado = multaDAO.anularMulta(idMulta);
+		} catch (SQLException e) {
+			return false;
+		}
+		return resultado;
+	}
+	
 	
 
 
