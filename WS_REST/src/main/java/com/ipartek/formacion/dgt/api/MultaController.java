@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ipartek.formacion.modelo.pojo.Agente;
+import com.ipartek.formacion.modelo.pojo.Coche;
 import com.ipartek.formacion.modelo.pojo.Multa;
 import com.ipartek.formacion.modelo.pojo.MultaNueva;
 import com.ipartek.formacion.service.AgenteService;
@@ -83,7 +84,27 @@ public class MultaController {
 			return response;
 
 		}
-	
-	
+		
+		
+		@RequestMapping( value= {"/api/multa/anular/{idMulta}"}, method = RequestMethod.PATCH)
+		public ResponseEntity<Multa> anular(@PathVariable int idMulta){		
+			
+			ResponseEntity<Multa> response = new ResponseEntity<Multa>(HttpStatus.INTERNAL_SERVER_ERROR);
+			boolean anulada = false;
+			
+			int id = (int) idMulta;
+			
+			try {
+				
+				anulada = agenteService.anular(id);
+				if (anulada == true) {
+					response = new ResponseEntity<Multa>(HttpStatus.OK);
+				}
+			} catch (Exception e) {
+				response = new ResponseEntity<Multa>(HttpStatus.NOT_FOUND);
+			}
+			
+			return response;
+		}
 	
 }
