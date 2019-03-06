@@ -7,22 +7,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogginComponent } from './components/loggin/loggin.component';
 import { PrincipalComponent } from './components/principal/principal.component';
-import { BuscarMatriculaComponent } from './components/buscar-matricula/buscar-matricula.component';
+
 import { NavComponent } from './components/nav/nav.component';
 import { ListadoMultasComponent } from './components/listado-multas/listado-multas.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { BackofficeComponent } from './components/backoffice/backoffice.component';
+import { FormularioMatriculaComponent } from './components/formulario-matricula/formulario-matricula.component';
+import { FormularioMultarComponent } from './components/formulario-multar/formulario-multar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogginComponent,
     PrincipalComponent,
-    BuscarMatriculaComponent,
+    FormularioMatriculaComponent,
     NavComponent,
     ListadoMultasComponent,
     AlertComponent,
-    BackofficeComponent    
+    BackofficeComponent,
+    FormularioMultarComponent    
   ],
   imports: [
     BrowserModule,

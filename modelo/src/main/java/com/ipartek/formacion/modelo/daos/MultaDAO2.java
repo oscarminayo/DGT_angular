@@ -36,7 +36,7 @@ private static MultaDAO2 INSTANCE = null;
 			"    m.fecha_mod,\r\n" + 
 			"    m.fecha_baja\r\n" + 
 			"FROM multa as m,coche as c, agente as a\r\n" + 
-			"WHERE m.id_agente = a.id AND m.id_coche = c.id AND a.id = ?;";
+			"WHERE m.id_agente = a.id AND m.id_coche = c.id AND a.id = ? ORDER BY m.id DESC;";
 	
 	//private static final String SQL_INSERT = "INSERT into multa (id_coche, id_agente, concepto, importe) VALUES (?, ?, ?, ?);";
 	private static final String SQL_INSERT = "{call pa_multa_insert(?,?,?,?,?)}";
