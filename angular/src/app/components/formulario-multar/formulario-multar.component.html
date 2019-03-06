@@ -1,0 +1,28 @@
+<app-nav></app-nav><br><br><br><br><br>
+<app-alert [alert]="alert"></app-alert>
+
+<main role="main" class="container">
+
+<div class="container" style="border:1px solid #17A2B8; padding:10px;" id="receta">
+	
+		<p><b>Matrícula:</b> {{coche.matricula }}</p>
+		<p><b>Modelo:</b> {{ coche.modelo}}</p>
+		<p><b>Km:</b> {{ coche.km}}</p>
+	
+</div>
+
+<form [formGroup]="formulario" (submit)="multar()">
+
+    <label for="importe"><b>Importe:</b></label>
+    <input type="text" formControlName="importe" class="form-control" required>
+  
+    <label for="concepto"><b>Concepto:</b></label>
+    <textarea type="text" formControlName="concepto" class="form-control" required></textarea>
+    <br>
+    <!--<button type="submit" class="btn btn-outline-primary btn-block">BUSCAR</button>-->
+    <button class="mt-6 btn btn-primary btn-block btn-lg " type="submit">
+      Multar
+    </button>
+  </form>
+
+</main>
